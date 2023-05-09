@@ -14,7 +14,12 @@
     .attribution a { color: hsl(228, 45%, 44%); }
   </style>
 </head>
+<script src="https://unpkg.com/react@16/umd/react.development.js"></script> 
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script> 
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> 
 <body>
+
+  <div id="root"></div>
 
   Day
   DD
@@ -31,7 +36,21 @@
   
   <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
+    Coded by <a href="#">hannah1306</a>.
   </div>
+
+
+  <script type="text/babel">
+    function App(){
+      return (
+        <div>Test Code</div>
+      )
+    }
+
+    ReactDOM.render(
+      <App />, document.querySelector('#root')
+    );
+  </script>
 </body>
+
 </html>
