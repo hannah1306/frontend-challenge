@@ -8,15 +8,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,700;1,400;1,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="./style.css">
   <title>Frontend Mentor | Age calculator app</title>
 
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
   <style>
-    input, span { font-family: 'Poppins', sans-serif; }
     .attribution { font-size: 11px; text-align: center; }
     .attribution a { color: hsl(228, 45%, 44%); }
-
-    .resultDiv span { font-size: 32px; }
   </style>
 </head>
 <script src="https://unpkg.com/react@16/umd/react.development.js"></script> 
@@ -33,7 +31,7 @@
 
   <script type="text/babel">
 
-    const { useState, Fragment } = React;
+    const { useState } = React;
 
     function App(){
 
@@ -45,7 +43,7 @@
       const [calDay, setCalDay] = useState('--');
 
       return (
-        <Fragment>
+        <div className="block">
           <div className="inputDiv">
             <span>DAY</span>
             <input type="text" name="day" placeholder="DD"/>
@@ -55,6 +53,7 @@
             <input type="text" name="year" placeholder="YYYY"/>
           </div>
           <div className="buttonDiv">
+            <div className="line"></div>
             <button className="calculator" />  
           </div>
           <div className="resultDiv">
@@ -68,7 +67,7 @@
               <span>{calDay}</span><span>days</span>
             </div>
           </div>
-        </Fragment>
+        </div>
       )
     }
 
