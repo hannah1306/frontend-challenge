@@ -35,29 +35,180 @@
 
     function App(){
 
-      const [day, setDay] = useState();
-      const [month, setMonth] = useState();
-      const [year, setYear] = useState();
+      const [day, setDay] = useState('');
+      const [month, setMonth] = useState('');
+      const [year, setYear] = useState('');
       const [calYear, setCalYear] = useState('--');
       const [calMonth, setCalMonth] = useState('--');
       const [calDay, setCalDay] = useState('--');
+      const [dayError, setDayError] = useState('');
+      const [monthError, setMonthError] = useState('');
+      const [yearError, setYearError] = useState('');
+      const [dayValid, setDayValid] = useState(true);
+      const [monthValid, setMonthValid] = useState(true);
+      const [yearValid, setYearValid] = useState(true);
+
+      const errorMessage = {
+        'empty' : 'This field is required.',
+        'invalidDay' : 'Must be a valid day.',
+        'invalidMonth' : 'Must be a valid month.',
+        'invalidYear' : 'Must be in the past.',
+        'invalidDate' : 'Must be a valid date.'
+      }
+
+      const calculate = () => {
+
+        allReset();
+        let isError = false;
+
+        //빈값 체크
+        if(day === ''){
+          isError = true;
+          setDayError(errorMessage.empty);
+          setDayValid(false);
+        }  
+        if(month === ''){
+          isError = true;
+          setMonthError(errorMessage.empty);
+          setMonthValid(false);
+        }
+        if(year === ''){
+          isError = true;
+          setYearError(errorMessage.empty);
+          setYearValid(false);
+        }
+
+        if(isError){
+          console.log(`stop ! 날짜 : ${year}-${month}-${day}, 빈값 에러`);
+          return;
+        }
+
+        //1~31, 1~12, 년도가 미래가 아닌지 체크
+        const intDay = parseInt(day, 10);
+        const intMonth = parseInt(month, 10);
+        const intYear = parseInt(year, 10);
+        const today = new Date();
+
+        if(isNaN(intDay) || intDay > 31){
+          isError = true;
+          setDayError(errorMessage.invalidDay);
+          setDayValid(false);
+        }
+        if(isNaN(intMonth) || intMonth > 12){
+          isError = true;
+          setMonthError(errorMessage.invalidMonth);
+          setMonthValid(false);
+        }
+        if(isNaN(intYear) || intYear > today.getFullYear()){
+          isError = true;
+          setYearError(errorMessage.invalidYear);
+          setYearValid(false);
+        }
+
+        if(isError){
+          console.log(`stop ! 날짜 : ${year}-${month}-${day}, 1~31, 1~12, 년도가 미래임`);
+          return;
+        }
+        
+        //날짜 유효성 체크
+        if(!checkValidDate()){
+          setDayValid(false);
+          setMonthValid(false);
+          setYearValid(false);
+          setDayError(errorMessage.invalidDate);
+          console.log(`stop ! 날짜 : ${year}-${month}-${day}, 유효하지 않은 날짜`);
+          return;
+        }
+
+        //연월일이 미래가 아닌지 체크
+        if(new Date(`${year}-${month}-${day}`).getTime() > today.getTime()){
+          setDayValid(false);
+          setMonthValid(false);
+          setYearValid(false);
+          setDayError(errorMessage.invalidYear);
+          setMonthError(errorMessage.invalidYear);
+          setYearError(errorMessage.invalidYear);
+          console.log(`stop ! 날짜 : ${year}-${month}-${day}, 년월일이 미래임`);
+          return;
+        }
+
+
+        //유효한 입력이므로 나이 계산시작
+        const diff = today.getTime() - new Date(`${year}-${month}-${day}`);
+        console.log(diff);
+
+        const y = Math.floor(diff / (1000*60*60*24) / 365);
+        const m = Math.floor((diff / (1000*60*60*24) % 365) / 30);
+        const d = Math.floor((diff / (1000*60*60*24) % 365) % 30);
+        
+        setCalYear(y);
+        setCalMonth(m);
+        setCalDay(d);
+
+      }
+
+      //초기화
+      const allReset = () => {
+        setCalDay('--');
+        setCalMonth('--');
+        setCalYear('--');
+        setDayValid(true);
+        setMonthValid(true);
+        setYearValid(true);
+        setDayError('');
+        setMonthError('');
+        setYearError('');
+      }
+
+      //정규식 년도 1600년이상만 됨
+      const checkValidDate = () => {
+        let result = true;
+        const dateRegex = /^(?=\d)(?:(?:31(?!.(?:0?[2469]|11))|(?:30|29)(?!.0?2)|29(?=.0?2.(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))(?:\x20|$))|(?:2[0-8]|1\d|0?[1-9]))([-.\/])(?:1[012]|0?[1-9])\1(?:1[6-9]|[2-9]\d)?\d\d(?:(?=\x20\d)\x20|$))?(((0?[1-9]|1[012])(:[0-5]\d){0,2}(\x20[AP]M))|([01]\d|2[0-3])(:[0-5]\d){1,2})?$/;
+        try {
+          const date = `${day}-${month}-${year}`;
+          console.log(`유효성체크 : ${date}`);
+          result = dateRegex.test(date);  
+        }catch (err){
+          result = false;
+        }
+        return result;
+      }
+
+      const inputNumber = (event) => {
+        const { name, value } = event.target;
+
+        switch(name){
+          case 'day' : setDay(value); break;
+          case 'month' : setMonth(value); break;
+          case 'year' : setYear(value); break;
+        }
+      }
 
       return (
         <div className="block">
           <div className="inputDiv">
-            <span>DAY</span>
-            <input type="text" name="day" placeholder="DD"/>
-            <span>MONTH</span>
-            <input type="text" name="month" placeholder="MM"/>
-            <span>YEAR</span>
-            <input type="text" name="year" placeholder="YYYY"/>
+            <div>
+              <span className={dayValid ? '' : 'error'}>DAY</span>
+              <input type="text" name="day" className={dayValid ? '' : 'error'} placeholder="DD" onChange={inputNumber}/>  
+              <span className="msg">{dayError}</span>
+            </div>
+            <div>
+              <span className={monthValid ? '' : 'error'}>MONTH</span>
+              <input type="text" name="month" className={monthValid ? '' : 'error'} placeholder="MM" onChange={inputNumber}/>
+              <span className="msg">{monthError}</span>
+            </div>
+            <div>
+              <span className={yearValid ? '' : 'error'}>YEAR</span>
+              <input type="text" name="year" className={yearValid ? '' : 'error'} placeholder="YYYY" onChange={inputNumber}/>
+              <span className="msg">{yearError}</span>
+            </div>
           </div>
           <div className="buttonDiv">
             <div className="line"></div>
             <div className="arrow-1"></div>
             <div className="arrow-2"></div>
             <div className="arrow-3"></div>
-            <button className="calculator" />  
+            <button className="calculator" onClick={calculate}/>  
           </div>
           <div className="resultDiv">
             <div>
