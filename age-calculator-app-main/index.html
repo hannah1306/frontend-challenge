@@ -189,17 +189,17 @@
           <div className="inputDiv">
             <div>
               <span className={dayValid ? '' : 'error'}>DAY</span>
-              <input type="text" name="day" className={dayValid ? '' : 'error'} placeholder="DD" onChange={inputNumber}/>  
+              <input type="text" name="day" className={dayValid ? '' : 'error'} placeholder="DD" onChange={inputNumber} maxLength="2"/>  
               <span className="msg">{dayError}</span>
             </div>
             <div>
               <span className={monthValid ? '' : 'error'}>MONTH</span>
-              <input type="text" name="month" className={monthValid ? '' : 'error'} placeholder="MM" onChange={inputNumber}/>
+              <input type="text" name="month" className={monthValid ? '' : 'error'} placeholder="MM" onChange={inputNumber} maxLength="2"/>
               <span className="msg">{monthError}</span>
             </div>
             <div>
               <span className={yearValid ? '' : 'error'}>YEAR</span>
-              <input type="text" name="year" className={yearValid ? '' : 'error'} placeholder="YYYY" onChange={inputNumber}/>
+              <input type="text" name="year" className={yearValid ? '' : 'error'} placeholder="YYYY" onChange={inputNumber} maxLength="4"/>
               <span className="msg">{yearError}</span>
             </div>
           </div>

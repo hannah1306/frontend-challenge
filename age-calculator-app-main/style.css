@@ -2,13 +2,19 @@ body { background-color: hsl(0, 0%, 86%);}
 .block { 
   width: 50%;
   max-width: 750px;
-  min-width: 570px;
+  min-width: 550px;
   margin: 0 auto;
   margin-top: 40px;
   background-color: white; 
   padding: 40px;
   border-radius: 20px;
   border-bottom-right-radius: 100px;
+}
+@media (max-width: 550px){
+  .block {
+    width: 80%;
+    min-width: 370px;
+  }
 }
 
 input {
@@ -18,6 +24,14 @@ input {
   border-radius: 10px;
   box-shadow: none;
   font-size: 32px;
+}
+@media (max-width: 550px){
+  input {
+    width: 80px;
+    padding:10px 13px;
+    border-radius: 5px;
+    font-size: 20px;
+  }
 }
 input:focus{ 
   outline: none;
@@ -95,8 +109,30 @@ input, span { font-family: 'Poppins', sans-serif; }
   border-width:1px;
   pointer-events: none;
 }
+.arrow-1::after,
+.arrow-2::after,
+.arrow-3::after{
+  z-index:1;
+}
+@media (max-width: 550px){
+  .buttonDiv{
+    margin:20px 0 30px;
+    text-align:center;
+  }
+  .line {
+    margin-right: 0px;
+  }
+  .arrow-1::after,
+  .arrow-3::after {
+    margin-left:0px;
+  }
+  .arrow-2::after{
+    margin-left: -20px;
+  }
+}
 
 button {
+  position:relative;
   width:80px;
   height:80px;
   border-radius:40px;
@@ -115,6 +151,12 @@ button:active {
   font-weight: 800;
   display: inline-block;
   height: 100px;
+}
+@media (max-width: 550px){
+  .resultDiv span { 
+    font-size: 65px;
+    height: 80px;
+  }
 }
 .resultDiv div span:nth-child(1){
   color: hsl(259, 100%, 65%);
