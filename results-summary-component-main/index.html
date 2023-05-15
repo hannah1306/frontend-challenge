@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
 
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">  <link rel="stylesheet" type="text/css" href="./style.css">
   <title>Frontend Mentor | Results summary component</title>
 
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
@@ -14,34 +16,62 @@
     .attribution a { color: hsl(228, 45%, 44%); }
   </style>
 </head>
+<script src="https://unpkg.com/react@16/umd/react.development.js"></script> 
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script> 
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> 
+<script src="https://kit.fontawesome.com/c507f5f112.js" crossorigin="anonymous"></script>
 <body>
 
-  Your Result
-  76
-  of 100
-
-  Great
-  You scored higher than 65% of the people who have taken these tests.
-  
-  Summary
-
-  Reaction
-  80 / 100
-
-  Memory
-  92 / 100
-
-  Verbal
-  61 / 100
-
-  Visual
-  72 / 100
-
-  Continue
+  <div id="root"></div>
   
   <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
     Coded by <a href="#">Your Name Here</a>.
   </div>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    function App(){
+
+      return (
+        <div className="block">
+          <div className="resultBox">
+            <span>Your Result</span>
+            <div className="circle">
+              <span className="totalScore">76</span>
+              <span>0f 100</span>  
+            </div>
+            <span>Great</span>
+            <p>You scored higher than 65% of the people who have taken these tests.</p>
+          </div>
+
+          <div className="summaryBox">
+            <span>Summary</span>
+            <div className="state reaction">
+              <span className="category">Reaction</span>  
+              <span className="score">80 / 100</span>
+            </div>
+            <div className="state memory">
+              <span className="category">Memory</span>  
+              <span className="score">92 / 100</span>
+            </div>
+            <div className="state verbal">
+              <span className="category">Verbal</span>  
+              <span className="score">61 / 100</span>
+            </div>
+            <div className="state visual">
+              <span className="category">Visual</span>  
+              <span className="score">72 / 100</span>
+            </div>
+
+            <button>Continue</button>
+          </div>
+        </div>
+      )
+    }
+
+    ReactDOM.render(<App />, document.querySelector('#root'));
+  </script>
 </body>
 </html>
