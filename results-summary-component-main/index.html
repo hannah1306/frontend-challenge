@@ -37,32 +37,40 @@
       return (
         <div className="block">
           <div className="resultBox">
-            <span>Your Result</span>
+            <span className="opacity title">Your Result</span>
             <div className="circle">
               <span className="totalScore">76</span>
-              <span>0f 100</span>  
+              <span className="opacity">of 100</span>  
             </div>
-            <span>Great</span>
-            <p>You scored higher than 65% of the people who have taken these tests.</p>
+            <span className="totalGrade">Great</span>
+            <p className="desc opacity">You scored higher than 65% of the people who have taken these tests.</p>
           </div>
 
           <div className="summaryBox">
-            <span>Summary</span>
+            <span className="title">Summary</span>
             <div className="state reaction">
-              <span className="category">Reaction</span>  
-              <span className="score">80 / 100</span>
+              <span className="category">
+                <i className="fa-solid fa-bolt"></i>Reaction
+              </span>  
+              <span className="score"><b>80</b> / 100</span>
             </div>
             <div className="state memory">
-              <span className="category">Memory</span>  
-              <span className="score">92 / 100</span>
+              <span className="category">
+                <i className="fa-solid fa-brain"></i>Memory
+              </span>  
+              <span className="score"><b>92</b> / 100</span>
             </div>
             <div className="state verbal">
-              <span className="category">Verbal</span>  
-              <span className="score">61 / 100</span>
+              <span className="category">
+                <i className="fa-regular fa-comment"></i>Verbal
+              </span>  
+              <span className="score"><b>61</b> / 100</span>
             </div>
             <div className="state visual">
-              <span className="category">Visual</span>  
-              <span className="score">72 / 100</span>
+              <span className="category">
+                <i className="fa-regular fa-eye"></i>Visual
+              </span>  
+              <span className="score"><b>72</b> / 100</span>
             </div>
 
             <button>Continue</button>

@@ -1,6 +1,6 @@
 # Frontend Challenge
 
-### Frontend Challenge for React Practice.
+### Frontend Challenge for React and CSS Practice.
 
 Challenge Reference : [Frontend Mentor](https://www.frontendmentor.io/challenges)
 
