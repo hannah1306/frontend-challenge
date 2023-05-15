@@ -5,7 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
 
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="./style.css">
   <title>Frontend Mentor | Interactive rating component</title>
 
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
@@ -14,36 +17,69 @@
     .attribution a { color: hsl(228, 45%, 44%); }
   </style>
 </head>
+<script src="https://unpkg.com/react@16/umd/react.development.js"></script> 
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script> 
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> 
+<script src="https://kit.fontawesome.com/c507f5f112.js" crossorigin="anonymous"></script>
 <body>
 
-  <!-- Rating state start -->
-
-  How did we do?
-
-  Please let us know how we did with your support request. All feedback is appreciated 
-  to help us improve our offering!
-
-  1 2 3 4 5
-
-  Submit
-
-  <!-- Rating state end -->
-
-  <!-- Thank you state start -->
-
-  You selected <!-- Add rating here --> out of 5
-
-  Thank you!
-
-  We appreciate you taking the time to give a rating. If you ever need more support, 
-  don’t hesitate to get in touch!
-
-  <!-- Thank you state end -->
-
+  <div id="root"></div>
   
   <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
     Coded by <a href="#">Your Name Here</a>.
   </div>
+
+  <script type="text/babel">
+    const { useState } = React;
+
+    function App(){
+
+      const [ isSubmit, setIsSubmit ] = useState(false);
+
+      const onSubmit = () => {
+        setIsSubmit(!isSubmit);
+      }
+
+      if(isSubmit){
+        return (
+          <div className="block">
+            <div className="selected">
+              <div>
+                <span>You selected 4 out of 5</span>  
+              </div>
+              <span>Thank you!</span>
+              <p>We appreciate you taking the time to give a rating. If you ever need more support, don't hesitate to get in touch!</p>
+            </div>
+          </div>
+        )
+      }else{
+        return (
+          <div className="block">
+            <div className="select">
+              <div>
+                <span>
+                  <i className="fa-solid fa-star"></i>
+                </span>
+              </div>
+              <p className="title">How did we do?</p>
+              <p>Please let us know how we did with your support request. All feedback is appreciated to help us improve our offering!</p>
+              <div className="ratingDiv">
+                <button className="rating">1</button>
+                <button className="rating">2</button>
+                <button className="rating">3</button>
+                <button className="rating">4</button>
+                <button className="rating">5</button>
+              </div>
+              <button className="submit" onClick={onSubmit}>SUBMIT</button>
+            </div>
+          </div>
+        );
+      }
+      
+    }
+
+    ReactDOM.render(<App />, document.querySelector('#root'));
+  </script>
 </body>
 </html>
