@@ -20,7 +20,6 @@
 <script src="https://unpkg.com/react@16/umd/react.development.js"></script> 
 <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script> 
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> 
-<script src="https://kit.fontawesome.com/c507f5f112.js" crossorigin="anonymous"></script>
 <body>
 
   <div id="root"></div>
@@ -31,13 +30,26 @@
   </div>
 
   <script type="text/babel">
-    const { useState } = React;
+    const { useState, useRef } = React;
 
     function App(){
 
       const [ isSubmit, setIsSubmit ] = useState(false);
+      const [ selected, setSelected ] = useState(undefined);
+      const numArr = useRef([]);
+
+      const select = (num) => {
+        if(selected !== undefined){
+          numArr.current[selected].classList.remove('active');
+        }
+        numArr.current[num].classList.add('active');
+        setSelected(num);
+      }
 
       const onSubmit = () => {
+        if(selected === undefined){
+          return; 
+        }
         setIsSubmit(!isSubmit);
       }
 
@@ -45,10 +57,11 @@
         return (
           <div className="block">
             <div className="selected">
-              <div>
-                <span>You selected 4 out of 5</span>  
+              <img src="./images/illustration-thank-you.svg"/>
+              <div className="desc">
+                <span>You selected {selected + 1} out of 5</span>  
               </div>
-              <span>Thank you!</span>
+              <span className="thank">Thank you!</span>
               <p>We appreciate you taking the time to give a rating. If you ever need more support, don't hesitate to get in touch!</p>
             </div>
           </div>
@@ -57,19 +70,17 @@
         return (
           <div className="block">
             <div className="select">
-              <div>
-                <span>
-                  <i className="fa-solid fa-star"></i>
-                </span>
+              <div className="star">
+                <img src="./images/icon-star.svg" />
               </div>
               <p className="title">How did we do?</p>
               <p>Please let us know how we did with your support request. All feedback is appreciated to help us improve our offering!</p>
               <div className="ratingDiv">
-                <button className="rating">1</button>
-                <button className="rating">2</button>
-                <button className="rating">3</button>
-                <button className="rating">4</button>
-                <button className="rating">5</button>
+                <button className="rating" onClick={() => select(0)} ref={(el) => numArr.current[0] = el}>1</button>
+                <button className="rating" onClick={() => select(1)} ref={(el) => numArr.current[1] = el}>2</button>
+                <button className="rating" onClick={() => select(2)} ref={(el) => numArr.current[2] = el}>3</button>
+                <button className="rating" onClick={() => select(3)} ref={(el) => numArr.current[3] = el}>4</button>
+                <button className="rating" onClick={() => select(4)} ref={(el) => numArr.current[4] = el}>5</button>
               </div>
               <button className="submit" onClick={onSubmit}>SUBMIT</button>
             </div>

@@ -17,6 +17,12 @@ button:hover {
   border-radius: 30px;
   background-color:hsl(213, 19%, 18%);
 }
+.star {
+  display:inline-block;
+  padding: 10px 12px 8px;
+  background-color: hsl(213, 19%, 26%);
+  border-radius: 21px;
+}
 p.title {
   font-size: 24px;
   font-weight: 700;
@@ -34,6 +40,14 @@ p.title {
   border-radius: 20px;
   background-color: hsl(213, 19%, 25%);
 }
+.rating:hover {
+  background-color:hsl(25, 97%, 53%);
+  color:white;
+}
+.rating.active {
+  background-color:hsl(217, 12%, 63%);
+  color:white;
+}
 .submit {
   width: 100%;
   background-color: hsl(25, 97%, 53%);
@@ -42,4 +56,27 @@ p.title {
   border: 0;
   letter-spacing: 4px;
   color: white;
+}
+.submit:hover {
+  background-color: white;
+  color: hsl(25, 97%, 53%);
+}
+
+.selected {
+  text-align: center;
+}
+.desc {
+  margin: 25px 0 30px;
+}
+.desc span {
+  color: hsl(25, 97%, 53%);
+  background-color: hsl(213, 19%, 26%);
+  padding: 9px 9px 6px;
+  border-radius: 17px;
+}
+.thank {
+  color: white;
+  font-size: 25px;
+  display: block;
+  margin: 15px;
 }
