@@ -8,3 +8,4 @@ Challenge Reference : [Frontend Mentor](https://www.frontendmentor.io/challenges
 - [advice-generator-app-main](https://hannah1306.github.io/frontend-challenge/advice-generator-app-main/)
 - [results-summary-component-main](https://hannah1306.github.io/frontend-challenge/results-summary-component-main/)
 - [interactive-rating-component-main](https://hannah1306.github.io/frontend-challenge/interactive-rating-component-main/)
+[faq-accordion-card-main](https://hannah1306.github.io/frontend-challenge/faq-accordion-card-main/)
