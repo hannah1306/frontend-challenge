@@ -5,7 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
 
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="./style.css">
   <title>Frontend Mentor | Base Apparel coming soon page</title>
 
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
@@ -14,20 +17,98 @@
     .attribution a { color: hsl(228, 45%, 44%); }
   </style>
 </head>
+<script src="https://unpkg.com/react@16/umd/react.development.js"></script> 
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script> 
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> 
 <body>
 
-  We're coming soon
+  <div id="root"></div>
 
-  Hello fellow shoppers! We're currently building our new fashion store. 
-  Add your email below to stay up-to-date with announcements and our launch deals.
-
-  Email Address
-  
   <footer>
     <p class="attribution">
       Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
       Coded by <a href="#">Your Name Here</a>.
     </p>
   </footer>
+
+  <script type="text/babel">
+    const { useState, useRef } = React;
+
+    function App(){
+
+      const [ email, setEmail ] = useState('');
+      const [ errMsg, setErrMsg ] = useState('');
+      const inputRef = useRef();
+
+      const handleChange = (e) => {
+        if(e.key === 'Enter'){
+          submit();
+        }
+      }
+
+      const submit = () => {
+        
+        const input = inputRef.current;
+
+        //email empty check
+        if(email === ''){
+          setErrMsg('This field is required.');
+          input.classList.add('error');
+          input.focus();
+          return;
+        }
+        //email valid check
+        const regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
+        if(!regex.test(email)){
+          setErrMsg('Please provide a valid email.');
+          input.classList.add('error');
+          input.focus();
+          return;
+        }
+        if(input.classList.contains('error')){
+          input.classList.remove('error');
+          setErrMsg('');
+        }
+        
+      }
+
+      return (
+        <div className="block">
+          <img className="logo" src="./images/logo.svg" />
+          <div className="inputDiv">
+            <div className="title">
+              <p>WE'RE</p>
+              <p>COMING</p>
+              <p>SOON</p>
+            </div>
+            <p className="desc">
+              Hello fellow shoppers! We're currently building our new fashion store. 
+              Add your email below to stay up-to-date with announcements and our launch deals.
+            </p>
+            <div className="form">
+              <input 
+                type="email" 
+                className="email" 
+                placeholder="Email Address" 
+                value={email} 
+                ref={inputRef}
+                onChange={(e) => setEmail(e.target.value)}
+                onKeyPress={handleChange}
+              />
+              <button className="submit" onClick={submit}>
+                <img src="./images/icon-arrow.svg"/>  
+              </button>
+              <span className="errorMsg">{errMsg}</span>
+            </div>
+          </div>
+
+          <div className="heroDiv"></div>
+        </div>
+      )
+    }
+    
+
+    ReactDOM.render(<App />, document.querySelector('#root'));
+  </script>
 </body>
 </html>
