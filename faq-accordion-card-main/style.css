@@ -1,0 +1,123 @@
+body {
+  height: 100%;
+  margin: 0;
+  background: linear-gradient(hsl(273, 75%, 66%), hsl(240, 73%, 65%));
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+p, span {
+  font-family: 'Kumbh Sans', sans-serif;
+  font-size: 12px;
+}
+
+.block {
+  width:730px;
+  height: 450px;
+  margin: 100px auto;
+  background-color: white;
+  display: flex;
+  border-radius: 30px;
+}
+.imageBox {
+  width: 350px;
+  background: url(./images/bg-pattern-desktop.svg) no-repeat 111% 64% / 200%;
+}
+.imageBoxMobile {
+  display: none;
+  text-align: center;
+}
+.womanMobile {
+  width: 260px;
+  margin-top: -115px;
+}
+
+.woman {
+  height: 100%;
+  background: url(./images/illustration-woman-online-desktop.svg) no-repeat 202% 50% / 110%;
+}
+.box {
+  width: 155px;
+  position: relative;
+  top: 41%;
+  left: -100px;
+}
+
+.faqBox {
+  flex: 1;
+  padding: 50px;
+}
+.title {
+  font-size: 20px;
+  font-weight: 700;
+}
+.accordion {
+  margin-top: 20px;
+}
+.accordionDiv {
+  border-bottom: 1px solid hsl(240, 5%, 91%);
+}
+.question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 15px 15px 0px;
+}
+.question .arrow{
+  display:inline-block;
+  width:10px;
+  height:10px;
+  background: url(./images/icon-arrow-down.svg) no-repeat 96% center / 10px;
+}
+.question.active .arrow {
+  transform: scaleY(-1);
+}
+.question:hover {
+  cursor: pointer;
+}
+.question:hover span {
+  color: hsl(14, 88%, 65%);
+}
+.question.active span{
+  font-weight: 700;
+  color: black;
+}
+
+.hidden {
+  max-height:0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+.hidden.active {
+  max-height: 100px;
+  transition: max-height 0.3s ease-in;
+}
+.hidden p {
+  margin: 0 0 20px;
+  color: hsl(240, 6%, 50%);
+}
+
+
+@media(max-width: 750px){
+  .block {
+    flex-direction: column;
+    height:510px;
+    width:360px;
+    margin: 130px auto;
+  }
+  .imageBox {
+    display: none;
+  }
+  .imageBoxMobile {
+    display: block;
+    height:115px;
+    background: url(./images/bg-pattern-mobile.svg) no-repeat center 0 / 73%;
+  }
+  .faqBox {
+    padding: 10px 30px;
+  }
+  .title {
+    display: block;
+    text-align: center;
+    font-size: 33px;
+  }
+}

@@ -5,7 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
 
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="./style.css">
   <title>Frontend Mentor | FAQ Accordion Card</title>
 
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
@@ -14,27 +17,125 @@
     .attribution a { color: hsl(228, 45%, 44%); }
   </style>
 </head>
+<script src="https://unpkg.com/react@16/umd/react.development.js"></script> 
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script> 
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> 
 <body>
-  How many team members can I invite?
-  You can invite up to 2 additional users on the Free plan. There is no limit on 
-  team members for the Premium plan.
 
-  What is the maximum file upload size?
-  No more than 2GB. All files in your account must fit your allotted storage space.
-
-  How do I reset my password?
-  Click “Forgot password” from the login page or “Change password” from your profile page.
-  A reset link will be emailed to you.
-
-  Can I cancel my subscription?
-  Yes! Send us a message and we’ll process your request no questions asked.
-
-  Do you provide additional support?
-  Chat and email support is available 24/7. Phone lines are open during normal business hours.
+  <div id="root"></div>
 
   <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
     Coded by <a href="#">Your Name Here</a>.
   </div>
+
+  <script type="text/babel">
+    
+    const { useRef, forwardRef } = React;
+    const faqList = [
+      {
+        q : 'How many team members can I invite?',
+        a : 'You can invite up to 2 additional users on the Free plan. There is no limit on team members for the Premium plan.'
+      },
+      {
+        q : 'What is the maximum file upload size?',
+        a : 'No more than 2GB. All files in your account must fit your allotted storage space.'
+      },
+      {
+        q : 'How do I reset my password?',
+        a : 'Click “Forgot password” from the login page or “Change password” from your profile page.A reset link will be emailed to you.'
+      },
+      {
+        q : 'Can I cancel my subscription?',
+        a : 'Yes! Send us a message and we\'ll process your request no questions asked.'
+      },
+      {
+        q : 'Do you provide additional support?',
+        a : 'Chat and email support is available 24/7.Phone lines are open during normal business hours.'
+      },
+    ];
+    
+
+    function Accordion({index, question, answer, click}, [accArr, hiddenArr]) {
+
+      return (
+        <div className="accordionDiv">
+          <div className="question" onClick={() => click(index)} ref={(el) => accArr.current[index] = el }>
+            <span>{question}</span>
+            <div className="arrow"></div>
+          </div>
+          <div className="hidden" ref={(el) => hiddenArr.current[index] = el } >
+            <p>{answer}</p>
+          </div>
+        </div>
+      )
+    }
+
+    Accordion = forwardRef(Accordion);
+
+    function App() {
+
+      const accArr = useRef([]);
+      const hiddenArr = useRef([]);   
+
+      const click = (num) => {
+        console.log(num);
+        let active = undefined;
+
+        accArr.current.map((data) => {
+          if(data.classList.contains('active')){
+            data.classList.remove('active');
+          }
+        });
+
+        hiddenArr.current.map((data, index) => {
+          if(data.classList.contains('active')){
+            data.classList.remove('active');
+            active = index;
+          }
+        });
+
+        if(active !== num){
+          accArr.current[num].classList.toggle('active');
+          hiddenArr.current[num].classList.toggle('active');
+        }
+      }
+
+      return (
+        <div className="block">
+
+          <div className="imageBox">
+            <div className="woman">
+              <img className="box" src="./images/illustration-box-desktop.svg"/>
+            </div>
+          </div>
+
+          <div className="imageBoxMobile">
+            <img className="womanMobile" src="./images/illustration-woman-online-mobile.svg"/>
+          </div>
+
+          <div className="faqBox">
+            <span className="title">FAQ</span>
+            <div className="accordion">
+              {
+                faqList.map((data, index) => 
+                  <Accordion 
+                    key={index} 
+                    index={index} 
+                    question={data.q} 
+                    answer={data.a} 
+                    click={click} 
+                    ref={[accArr, hiddenArr]}
+                  />
+                )
+              }
+            </div>
+          </div>
+        </div>
+      )
+    }
+
+    ReactDOM.render(<App />, document.querySelector('#root'));
+  </script>
 </body>
 </html>
