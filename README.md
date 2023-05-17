@@ -9,3 +9,4 @@ Challenge Reference : [Frontend Mentor](https://www.frontendmentor.io/challenges
 - [results-summary-component-main](https://hannah1306.github.io/frontend-challenge/results-summary-component-main/)
 - [interactive-rating-component-main](https://hannah1306.github.io/frontend-challenge/interactive-rating-component-main/)
 - [faq-accordion-card-main](https://hannah1306.github.io/frontend-challenge/faq-accordion-card-main/)
+- [base-apparel-coming-soon-master](https://hannah1306.github.io/frontend-challenge/base-apparel-coming-soon-master/)
